@@ -1,1 +1,1 @@
-dflkdsfklj;fke[sfied;]
+web: gunicorn ecommerce.wsgi
