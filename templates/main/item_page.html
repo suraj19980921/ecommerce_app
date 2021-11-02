@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   
+
+   <div class="container">
+       <div class="row" id="item_height">
+           <div class="col col-sm-6">
+            <img src="/media/{{item_details.item_image}}" class="img-fluid" alt="{{item_details.item_name}}" height="500" width="500"> 
+           </div>
+           <div class="col col-sm-6">
+            <div class="fw-bold fs-1">
+                {{item_details.item_name}}
+            </div> 
+            <div>
+                <div class="text-danger fs-5"> Price: Rs {{item_details.item_price}}</div>
+
+                <div class="fs-5 fw-bold mt-2">
+                    About this item
+                </div> 
+                <div><p>{{item_details.item_description}}</p></div>
+            </div>
+            
+           <a href="{% url 'addtocart' item_details.id %}" class="btn btn-primary mt-2">Add to cart</a>
+           </div>
+       </div>
+   </div>
+   
+
+    
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">E-commerce</a>
+      {% if request.user.is_authenticated %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+     
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+         
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              {% for category in categories %}
+              {% ifchanged %}
+              <li><a class="dropdown-item" href="{% url 'items' category.id %}">{{category.category_name}}</a></li>
+              {% endifchanged %}
+              {% endfor %}
+            </ul>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'orders' %}">Orders</a>
+          </li>
+          <li class="nav-item">
+            {% if request.user.shop_set.all %}
+            <a class="nav-link active" aria-current="page" href="{% url 'shop_items'%}">Your Shop</a>
+            {% else %}
+            <a class="nav-link active" aria-current="page" href="{% url 'create_shop'%}">Sell on E-commerce</a>
+            {% endif %}
+          </li>
+          {% if user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+       
+        <div class="text-white fw-bold ">Hello, {{user.first_name }} {{user.last_name}}</div>&nbsp;&nbsp;
+       
+       <div>
+        
+       <a href="/cart/" class="position-relative">
+          <i class="fas fa-shopping-cart" style="color: white; font-size:30px;"></i>
+          <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+            <span id="cart_count">{{cart_count}}</span>
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
+       </div>&nbsp;&nbsp; 
+      </div>
+      {% else %}
+     
+       <p class="fw-bold  ecom_greet">Welcome to Ecommerce</p>
+       <ul class="navbar-nav mx-5">
+        <li class="">
+          <a class="nav-link active fs-5" aria-current="page" href="{% url 'login' %}">LogIn</a>
+        </li>
+      </ul>
+      {% endif %} 
+    </div>
+  </nav>

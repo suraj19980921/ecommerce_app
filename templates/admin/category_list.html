@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="container-fluid">
+   <h1 class="fw-bold text-success"> Category List </h1>
+   
+   {% if categories %}
+   
+   <div class=" d-flex justify-content-end"><button type="button" class="btn btn-primary col-sm-2 mt-2" data-bs-toggle="modal" data-bs-target="#Add_category_Modal">Add New Category</button></div>
+   
+   <div class="table-responsive">
+   <table class="table table-hover table-responsive{-sm|-md|-lg|-xl|-xxl} mt-1">
+      <thead class="table-warning">
+          <th>Category Id</th>
+          <th>Category Name</th>
+          <th>Action</th>
+       
+      </thead>
+      {% for category in categories %}
+     <tr>
+        <td>{{category.id}}</td>
+        <td>{{category.category_name}}</td>
+        <td>
+            <button class="btn btn-danger  mt-2"  data-bs-toggle="modal" data-bs-target="#delete_category_Modal" onclick="setId('{{category.id}}')">Remove</button>
+        </td>
+     </tr>
+     {% endfor %}
+  </table>
+</div>
+   {% if is_paginated %}
+       <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+             {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+             {% else %}
+                <li class="disabled"><a class="page-link" href="#">Previous</a></li>
+             {% endif %}
+            
+            
+             {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                   <li class="active"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                   <li><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                
+             {% endfor %}
+
+             {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+             {% else %}
+                <li class="disabled"><a class="page-link" href="#">Next</a></li>
+             {% endif %}
+          
+    
+          </ul>
+       </nav>
+    {% endif %}
+
+   {% else %}
+      <p class="text-danger fs-2 fw-bold text-center mt-5">No record found</p>
+  {%endif%}
+          <!-- Add_Category Modal Form -->
+ <div class="modal fade" id="Add_category_Modal" tabindex="-1" aria-labelledby="AddCategoryModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title text-primary fs-3 fw-bold" id="Add_category_Label">Add Category</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+          <form action="/admin/add_category/" method="post" id="add_category_form">
+             {% csrf_token %}
+            {{form.as_p}}
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary"  name="action" value="item_form">Add</button>
+      </form>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+
+
+
+      <!-- Delete Modal Form -->
+      <div class="modal fade" id="delete_category_Modal" tabindex="-1" aria-labelledby="delete_category_Modal" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title text-danger fs-3 fw-bold" id="deleteModalLabel">Remove Category</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                <form action="#" method="post" id="delete_category_form">
+                   {% csrf_token %}
+                   <p class="fw-bold fs-4">Are You sure ?</p>
+                   <p class="text-danger">If you remove this category, all the items belong to this category will be deleted.</p>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+        <!--Messages-->
+      {% if messages %}
+         {% for message in messages %}
+            <p id="delete_category_message" data-delete_category_message="{{message}}"></p>
+         {% endfor %}
+      {% endif %}
+
+{% endblock %}

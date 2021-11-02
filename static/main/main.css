@@ -1,0 +1,127 @@
+
+@media screen and (min-width: 480px) {
+
+     #item_height{ margin-top: 10%; }
+     #cart_img_dimensions{
+
+          height:90%;
+          width:100%
+     }
+
+     .item_image{ 
+          height:55%;
+          width:50%;
+          margin-left:20%;
+          margin-top:10%;
+     }
+
+     .ecom_greet{ position:absolute;
+                  margin-left:37%;
+                  font-size:30px;
+                  margin-top:1%; color:white;
+     }
+                  
+     .shop_item_image{
+          height: 100%;
+          width: 100%;
+     }          
+
+     .descbox{
+        
+          height:150px;
+          width:250px;
+          word-wrap:break-word;
+          vertical-align: middle;
+          overflow: auto;
+         
+     }
+
+     .image_box{
+
+          height:150px;
+          width:150px;
+     }
+
+
+
+     .descbox span{
+         text-overflow: ellipsis;
+     }
+
+
+     .home_image_box{ height:45%; width:45%; }
+
+     .home_desc_box{
+          height:100px;
+          width:100%;
+          overflow: hidden;
+         
+     }
+
+     .card_box{
+
+          height:20%;
+          width:100%;
+     }
+
+
+   }
+
+
+@media screen and (max-width: 480px) {
+
+     #item_height{ margin-top: 40%; }
+
+     #cart_img_dimensions{ height:95%; width:100%; }
+
+     #item-quantity{ width:60%;}
+
+     .item_image{ 
+          height:30%;
+          width:50%;
+          margin-left:20%;
+          margin-top:50%;
+     }
+
+     .ecom_greet{ position:absolute; font-size:20px; margin-left:15%; margin-top:30%; color:crimson;}
+
+     .shop_item_image{
+          margin-top: 20%;
+          height: 100%;
+          width: 100%;
+          
+     }  
+
+     .descbox{
+          height:100px;
+          width:150px;
+          overflow: auto;
+     }
+
+     .item_descbox{
+          height:200px;
+          width:150px;
+          overflow: auto;
+     }
+
+
+     .home_desc_box{
+          height:100px;
+          width:100%;
+          overflow: hidden;
+         
+     }
+
+     .home_image_box{ height:45%; width:45%; }
+    
+   }
+
+
+
+.errorlist{
+     display: none;
+}
+
+.td_padding{
+     padding:10%;
+}

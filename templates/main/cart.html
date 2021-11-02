@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    
+    <div class="container-fluid">
+       
+        <h1 class="text-success mt-2">Your cart</h1>
+
+               {% if cart_items%}
+                {% for cart_item in cart_items %}
+                   <div class="row border-bottom border-grey border-2">
+                        <div class="col col-sm-3">
+                            <img src="/media/{{cart_item.item_id.item_image}}"  id="cart_img_dimensions" alt="{{cart_item.item_id.item_name}}"> 
+                        </div> 
+                        <div class="col col-sm-6">
+                            <div class="mx-5">
+                                <div class="fw-bold fs-3 text-right" id="product_id">{{cart_item.item_id.item_name}} </div>
+                                <div class="text-danger fs-5" id="product_price"> Price:{{cart_item.item_id.item_price}}</div>
+                                <div class="fs-5 mt-1   input-group" id="item-quantity"> Quantity:<span class="col-sm-3 "><input type="number" class="form-control" value="{{cart_item.quantity}}" id="product_quantity" onkeyup="update_quantity('{{cart_item.id}}',(this.value))"></span></div>
+                                <button class="btn btn-danger  mt-1 mb-1"  id="delete_cart_button" data-bs-toggle="modal" data-bs-target="#delete_cart_Modal" onclick = "setmainId('{{cart_item.id}}')">Remove</button> </td>
+                            </div>
+                        </div>
+                    </div class="mb-5">
+                {% endfor %}
+                  </div>          
+                <div class="fixed-bottom bg-info">
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight mx-4"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Order</button></div>
+                        <div class="p-2 bd-highlight mt-1 mx-3 fw-bold text-white" id="item_quantity_footer"> Quantity: <span class="quantity">{{quantity.total}}</span></div>
+                        <div class="p-2 bd-highlight mt-1  fw-bold text-white" id="item_price_footer">Total Price: <span class="total_price">{{total_price.total}}</span></div>
+                    
+                    </div>
+                </div>
+                {%else %}
+                <p class="fs-1 fw-bold text-danger text-center" style="margin-top:10%">Your cart is empty </p>
+                {% endif %}
+
+<!-- Order Form -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Order Form</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div>
+                            <p>Total no. of items : <span class="quantity">{{quantity.total}}</span></p>
+                            <p>Total Price : <span class="total_price">{{total_price.total}}</span></p>
+                        </div>
+                        <form action="{% url 'create_order' %}" method="post" id="order_form">
+                          {% csrf_token %}
+                          <div class="mb-3">
+                            <label for="shipping_address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="shipping_address" rows="3" name="shipping_address"></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="pincode" class="form-label">Pincode</label>
+                            <input type="number" class="form-control" id="pincode" rows="3" name="pincode"></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="mobile_no" class="form-label">Mobile no</label>
+                            <input type="number" class="form-control" id="mobile_no" rows="3" name="mobile_no"></textarea>
+                          </div>
+                     
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm Order</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+   
+
+  
+                <!-- Delete Modal Form -->
+<div class="modal fade" id="delete_cart_Modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger fs-3 fw-bold" id="delete_cart_ModalLabel">Delete Cart Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form action="#" method="post" id="delete_cart_form">
+            {% csrf_token %}
+            <p class="fw-bold fs-4">Are You sure ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Delete</button>
+     </form>
+      </div>
+    </div>
+  </div>
+</div>
+   
+    {% if messages %}
+          {% for message in messages %}
+              <p id="cart_message" data-cart_message="{{message}}" ></p>
+          {% endfor %}
+    {% endif %}
+ 
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="container-fluid">
+     <div class="row">
+         <div class="col">
+             <div class="fw-bold fs-2 border-bottom-primary">
+                 <p class="border-bottom-primary">Dashboard</p>
+             </div>
+         </div>
+     </div>
+
+
+     <div class="row">
+         <div class="col-sm-6 d-flex justify-content-center">
+            <div class="card mt-5 border-danger" style="width: 20rem;">
+                <div class="card-body">
+                  <h5 class="card-title text-primary fs-2">Users</h5>
+                  <p class="card-text mt-4 fs-3">Total Users : {{users.count}}</p>
+                  <a href="/admin/users_list/" class="btn btn-success  mt-3 list_button">Users List</a> 
+                </div>
+              </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="card mt-5  border-danger card_two" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-primary fs-2">Shops</h5>
+                    <p class="card-text mt-4 fs-3">Total Shops : {{shops.count}}</p>
+                    <a href="{% url 'shops_list' %}" class="btn btn-success list_button mt-3 ">Shops List</a> 
+                </div>
+            </div>
+                
+         </div>
+     </div>
+ 
+ <div class="row">
+    <div class="col-sm-6 d-flex justify-content-center">
+       <div class="card mt-5  border-danger" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title text-primary fs-2">Items</h5>
+            <p class="card-text mt-4 fs-3">Total Items : {{items.count}}</p>
+            <a href="{% url 'items_list' %}" class="btn btn-success  mt-3 list_button">Items List</a> 
+          </div>
+         </div>
+    </div>
+    <div class="col-sm-6">
+       <div class="card mt-5  border-danger card_two" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title text-primary fs-2">Categories</h5>
+            <p class="card-text mt-4 fs-3">Total Categories : {{category.count}}</p>
+            <a href="{% url 'category_list' %}" class="btn btn-success  mt-3 list_button">Category List</a> 
+          </div>
+         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 d-flex justify-content-center">
+       <div class="card mt-5  border-danger" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title text-primary fs-2">Carts</h5>
+            <p class="card-text mt-4 fs-3">Total Carts : {{carts.count}}</p>
+            <a href="{% url 'carts_list' %}" class="btn btn-success mt-3 list_button">carts List</a> 
+          </div>
+         </div>
+    </div>
+    <div class="col-sm-6">
+       <div class="card mt-5  border-danger card_two" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title text-primary fs-2">Orders</h5>
+            <p class="card-text mt-4 fs-3">Total Orders : {{orders.count}}</p>
+            <a href="{% url 'orders_list' %}" class="btn btn-success mt-3 list_button">Orders List</a> 
+          </div>
+         </div>
+      </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 d-flex justify-content-center">
+        <div class="card mt-5  border-danger" style="width: 20rem;">
+         <div class="card-body">
+             <h5 class="card-title text-primary fs-2">Sales</h5>
+             <p class="card-text mt-4 fs-3">Total Sales : {{orders.count}}</p>
+             <a href="{% url 'sales_report_list' %}" class="btn btn-success mt-3 list_button">Sales Report</a> 
+           </div>
+          </div>
+    </div>
+</div>
+
+</div>
+
+</div>
+{% endblock %}

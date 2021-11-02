@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="container">
+     <div class="row">
+         <div class="col col-sm-6  singup_box">
+             <div class="fw-bold fs-2 mb-2 text-center">Signup</div>
+            <form action="{% url 'signup' %}" method="post" class="signup_form" id="signup_form">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit"  class="btn btn-success  col-sm-6 mb-2 fw-bold mt-2 signup_button">Signup</button>
+                <div class="text-center fw-bold "><a class="text-decoration-none" href="{% url 'login'%}">&larr; back</a></div>
+            </form>
+         </div>
+     </div>
+ </div>
+ 
+        {% if form.errors %}
+            {% for error in form.errors %}
+                {{error}}
+            {% endfor %}
+        {% endif %}
+  
+{% endblock %}
