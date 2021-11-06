@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from typing import cast
 from decouple import config
 import dj_database_url
 import django_heroku
@@ -79,10 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processors.galobal_data',
             ],
-             'libraries':{
-                            'app_filters': 'admin.template_tags.app_filters',
-            
-            }
+             
         },
     },
 ]

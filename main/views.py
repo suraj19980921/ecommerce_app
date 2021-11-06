@@ -1,9 +1,8 @@
-from django.db.models.expressions import OrderBy
+
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.views.generic.base import ContextMixin, View
+from django.views.generic.base import  View
 from django.views.generic.edit import DeleteView, ModelFormMixin, UpdateView
-from django.views.generic.list import MultipleObjectMixin
 from main import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
