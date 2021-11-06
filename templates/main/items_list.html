@@ -2,6 +2,7 @@
 
 {% block content %}
     
+{% if items_list %}
 <div class="container-fluid">
     {% for item in items_list %}
     <div class="row border-bottom border-grey mt-2">
@@ -57,4 +58,7 @@
 
 
 </div>
+{% else %}
+   <p class="fs-1 fw-bold text-danger text-center" style="margin-top:10%"> Items not available </p>
+{% endif %}
 {% endblock %}
